@@ -98,22 +98,3 @@ class Lists:
 
 
 
-list = Lists()
-org_id = list.organisation()
-board_id = list.board(org_id)
-list_response = list.create_list_using_post_api(board_id)
-list_id = list.list_id(list_response)
-print(list.list_name(list_response))
-print(list.list_status_code(list_response))
-print(list.updated_name_of_the_list(list_id))
-print(list.close_list_by_putclose_api(list_id))
-print(list.change_position_of_the_list_by_put_api(list_id))
-print(list.set_soft_limit_of_card(list_id))
-print(list.subscription_detail(list_id))
-print(list.get_api_to_check_sybscription_in_field(list_id))
-print(list.get_api_check_board_information(list_id))
-objboard = Board()
-objboard.delete_board(board_id)
-objorganisation = Organisation()
-#
-objorganisation.delete_organisation(org_id)

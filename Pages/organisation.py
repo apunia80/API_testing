@@ -26,10 +26,19 @@ class Organisation:
     def get_organisation_status_code(self, response):
         return response.status_code
 
-    def get_api_in_gets_the_status_code(self, organisation_id):     ##get api
-        getresponse = requests.request('GET', constant.post_organisation_url + "/" + organisation_id,
+    def get_api_in_gets_the_display_member(self, organisation_id):  ##get api
+        getresponse = requests.request('GET',
+                                       constant.post_organisation_url + "/" + organisation_id + '/' + constant.membercount,
                                        params={"key": constant.consumer_Key, "token": constant.access_Token})
-        getresponse.status_code
+        member_value = json.loads(getresponse.text)
+        return member_value['_value']
+
+    def get_api_status_code(self,organisation_id):
+        getresponse = requests.request('GET',
+                                       constant.post_organisation_url + "/" + organisation_id,
+                                       params={"key": constant.consumer_Key, "token": constant.access_Token})
+
+        return getresponse.status_code
 
     def update_the_name_of_organisation(self, organisation_id):  ##2nd api PUT
         updatedresponse = requests.request('PUT', constant.post_organisation_url + "/" + organisation_id,

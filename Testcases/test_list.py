@@ -28,7 +28,7 @@ class TestLists:
     def test_creation_of_list(self):
         response = self.objlist.create_list_using_post_api(self.board_id)
         try:
-            assert response.status_code == 200
+            assert response.status_code == constant.test_successful
         except:
             logging.error("list not created succesfully")
 
@@ -43,7 +43,7 @@ class TestLists:
         objboard.delete_board(board_id)
         objorganisation.delete_organisation(org_id)
         try:
-            assert negative_list_response == 400
+            assert negative_list_response == constant.negative_case
         except:
             logging.error(" in list it runs with blank name input")
 
@@ -68,7 +68,7 @@ class TestLists:
     @pytest.mark.usefixtures('list_fixture')
     def test_put_close_archive_the_list(self):
         try:
-            assert self.objlist.close_list_by_putclose_api(self.list_id) == True
+            assert self.objlist.close_list_by_putclose_api(self.list_id) == constant.true
         except:
             logging.error("in list request not archived")
 
@@ -82,29 +82,31 @@ class TestLists:
     @pytest.mark.usefixtures('list_fixture')
     def test_subscription_api_status_code(self):
         try:
-            assert self.objlist.subscription_detail(self.list_id) == 200
+            assert self.objlist.subscription_detail(self.list_id) == constant.test_successful
         except:
             logging.error("in list subscription not done")
 
     @pytest.mark.usefixtures('list_fixture')
     def test_subscription_boolien_value_the_list_is_subscribed_or_not(self):
         try:
-            assert self.objlist.get_api_to_check_sybscription_in_field(self.list_id)==True
+            assert self.objlist.get_api_to_check_sybscription_in_field(self.list_id)==constant.true
         except:
             logging.error("in list channel is not subscribed")
 
     @pytest.mark.usefixtures('list_fixture')
     def test_get_board_gives_information_about_board_in_which_list_is_present(self):
         try:
-            assert self.objlist.get_api_check_board_information(self.list_id) == 200
+            assert self.objlist.get_api_check_board_information(self.list_id) == constant.test_successful
         except:
             logging.error("information cannot be fatched")
 
     @pytest.mark.usefixtures('list_fixture')
     def test_get_all_information_about_cards(self):
         try:
-            assert self.objlist.get_list_of_card_in_a_list(self.list_id)
+            assert self.objlist.get_list_of_card_in_a_list(self.list_id) == constant.test_successful
 
         except:
             logging.error("list card information cannot fetched")
+
+
 

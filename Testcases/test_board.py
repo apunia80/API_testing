@@ -34,13 +34,33 @@ class TestBoard:
         board_name = self.objboard.get_board_name(self.board_response)
 
         try:
-            assert updatedname != board_name  # to check logger i makes the file equal
+            assert updatedname != board_name
         except:
             logging.error("Board name not updated")
 
     @pytest.mark.usefixtures('link_org')
     def test_board_username_field_is_empty(self):
         try:
-            assert self.objboard.name_empty_board(self.org_id) == 400
+            assert self.objboard.name_empty_board(self.org_id) == constant.negative_case
         except:
             logging.error("Name is not empty")
+
+    @pytest.mark.usefixtures('link_org')
+    def test_board_label_color_changed_or_not(self):
+        try:
+            assert self.objboard.create_labels_in_the_board(self.board_id) == constant.color
+        except:
+            logging.warning("color of label not changed please check")
+
+    @pytest.mark.usefixtures('link_org')
+    def test_check_list_in_the_board(self):
+        assert self.objboard.get_info_about_create_list_inboard(self.board_id) == constant.test_successful
+
+    @pytest.mark.usefixtures('link_org')
+    def test_side_bar_created_or_not(self):
+        try:
+            assert self.objboard.show_sidebar_in_board_put(self.board_id) == constant.test_successful
+        except:
+            logging.warning("sidebar is created in false value")
+
+

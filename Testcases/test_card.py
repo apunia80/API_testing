@@ -32,35 +32,35 @@ class TestCard:
     @pytest.mark.usefixtures('card_fixture')
     def test_card_is_created_or_not(self):
         try:
-            assert self.card_response.status_code == 200
+            assert self.card_response.status_code == constant.test_successful
         except:
             logging.error("card not created")
 
     @pytest.mark.usefixtures('card_fixture')
     def test_delete_of_card_is_happened(self):
         try:
-            assert self.objcard.delete_card_using_delete_api(self.card_id) == 200
+            assert self.objcard.delete_card_using_delete_api(self.card_id) == constant.test_successful
         except:
             logging.error("card not deleted")
 
     @pytest.mark.usefixtures('card_fixture')
     def test_action_comment_added_to_card(self):
         try:
-            assert self.objcard.add_action_api_comment_on_card(self.card_id) == 200
+            assert self.objcard.add_action_api_comment_on_card(self.card_id) == constant.test_successful
         except:
             logging.error("card comment not added")
 
     @pytest.mark.usefixtures('card_fixture')
     def test_color_change_of_card_using_label(self):
         try:
-            assert self.objcard.post_change_color_of_card(self.card_id) == 'yellow'
+            assert self.objcard.post_change_color_of_card(self.card_id) == constant.color
         except:
             logging.error("card color not changed")
 
     @pytest.mark.usefixtures('card_fixture')
     def test_mark_associated_notification_read(self):
         try:
-            assert self.objcard.mark_associated_notifications_read(self.card_id) == 200
+            assert self.objcard.mark_associated_notifications_read(self.card_id) == constant.test_successful
         except:
             logging.error("card notification is not readable")
 
@@ -76,14 +76,14 @@ class TestCard:
     def test_position_of_card_using_get_api(self):
         try:
             ##we also use status_code here to check api is working properly
-            assert self.objcard.get_position_of_card_using_field(self.card_id) == 16384
+            assert self.objcard.get_position_of_card_using_field(self.card_id) == constant.position
         except:
             logging.error('card position is not available')
 
     @pytest.mark.usefixtures('card_fixture')
     def test_list_in_which_card_is_present(self):
         try:
-            assert self.objcard.get_list_in_which_card_is_present(self.card_id)== 200
+            assert self.objcard.get_list_in_which_card_is_present(self.card_id)== constant.test_successful
         except:
             logging.error("in card list of card not available")
 
@@ -92,9 +92,11 @@ class TestCard:
     @pytest.mark.usefixtures('card_fixture')
     def test_when_name_field_is_empty(self):
         try:
-            assert self.objcard.name_field_is_empty() == 400
+            assert self.objcard.name_field_is_empty() == constant.negative_case
         except:
             logging.error("name field is not empty here")
+
+
 
 
 

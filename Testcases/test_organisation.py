@@ -4,8 +4,7 @@ import pytest
 import constant
 
 ##logger file
-logging.basicConfig(filename='testloggers.log', format='%(asctime)s :%(levelname)s: %(message)s')
-
+logging.basicConfig(filename=constant.logger_file, format=constant.logger_format)
 
 class Testcases:
     @pytest.yield_fixture()

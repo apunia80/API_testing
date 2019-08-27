@@ -4,8 +4,7 @@ import pytest
 import constant
 from Pages.board import Board
 
-logging.basicConfig(filename='testloggers.log', format='%(asctime)s :%(levelname)s: %(message)s')
-
+logging.basicConfig(filename=constant.logger_file, format=constant.logger_format)
 
 class TestBoard:
 

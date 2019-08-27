@@ -1,8 +1,7 @@
-from Pages.board import Board
-from Pages.organisation import Organisation
-import constant
 import requests
 import json
+import constant
+from Pages.board import Board
 
 
 class Lists:
@@ -79,22 +78,19 @@ class Lists:
                                            params=constant.close_put_list)
         return list_sub_detail.status_code
 
-    def get_api_to_check_sybscription_in_field(self, list_id):
+    def get_api_to_check_sybscription_in_field(self, list_id):  # 8th get subscription
         get_field_response = requests.request("GET", constant.list_base_url + '/' + list_id + '/subscribed',
                                               params=constant.auth)
         boolien_value = json.loads(get_field_response.text)
 
         return boolien_value['_value']
 
-    def get_api_check_board_information(self,list_id):
-        get_board_info= requests.request("GET", constant.list_base_url + '/' + list_id + '/board',
-                                              params=constant.auth)
+    def get_api_check_board_information(self, list_id):  # 9 getbord detail
+        get_board_info = requests.request("GET", constant.list_base_url + '/' + list_id + '/board',
+                                          params=constant.auth)
         return get_board_info.status_code
 
-    def get_list_of_card_in_a_list(self,list_id):
+    def get_list_of_card_in_a_list(self, list_id):  # 10 getccard info
         get_card_info = requests.request("GET", constant.list_base_url + '/' + list_id + '/cards',
-                                          params=constant.auth)
+                                         params=constant.auth)
         return get_card_info.status_code
-
-
-

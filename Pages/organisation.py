@@ -29,26 +29,32 @@ class Organisation:
     def get_api_in_gets_the_display_member(self, organisation_id):  ##get api
         getresponse = requests.request('GET',
                                        constant.post_organisation_url + "/" + organisation_id + '/' + constant.membercount,
-                                       params={"key": constant.consumer_Key, "token": constant.access_Token})
+                                       params=constant.auth)
         member_value = json.loads(getresponse.text)
         return member_value['_value']
 
-    def get_api_status_code(self,organisation_id):
+    def get_api_status_code(self, organisation_id):
         getresponse = requests.request('GET',
                                        constant.post_organisation_url + "/" + organisation_id,
-                                       params={"key": constant.consumer_Key, "token": constant.access_Token})
+                                       params=constant.auth)
 
         return getresponse.status_code
 
     def update_the_name_of_organisation(self, organisation_id):  ##2nd api PUT
         updatedresponse = requests.request('PUT', constant.post_organisation_url + "/" + organisation_id,
-                                           params={"displayName": constant.updated_name, "key": constant.consumer_Key,
-                                                   "token": constant.access_Token})
+                                           params=constant.displayname)
         updateddisplayname = json.loads(updatedresponse.text)
 
         return updateddisplayname['displayName']
 
     def delete_organisation(self, organisation_id):  # 4rd api Delete
-        res1 = requests.request('DELETE', constant.post_organisation_url + "/" + organisation_id,
-                                params={"key": constant.consumer_Key, "token": constant.access_Token}
-                                )
+        delete_response = requests.request('DELETE', constant.post_organisation_url + "/" + organisation_id,
+                                           params=constant.auth)
+
+        return delete_response.status_code
+
+    def create_new_collection_in_team_using_post_tages(self, organisation_id): #5th tagcollections
+        new_tag_response = requests.request('POST',
+                                            constant.post_organisation_url + "/" + organisation_id + constant.otags,
+                                            params=constant.otagquery)
+        return new_tag_response.status_code

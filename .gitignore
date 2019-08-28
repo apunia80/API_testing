@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+.gitignore/
+.pytest_cache/
+venv/
+.idea/
+logs/
+.cache/
+assets/

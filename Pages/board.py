@@ -66,3 +66,8 @@ class Board:
                                     params=constant.sidebarquery)
 
         return get_info.status_code
+
+    def get_api_board_email_key_generated(self,board_id):
+        email_key=requests.request("POST", constant.board_base_url + '/' + board_id + constant.emailkey_query,
+                                    params=constant.auth)
+        return email_key.status_code

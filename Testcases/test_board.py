@@ -3,8 +3,8 @@ from Pages.organisation import Organisation
 import pytest
 import constant
 from Pages.board import Board
+from logger_file import *
 
-logging.basicConfig(filename=constant.logger_file, format=constant.logger_format)
 
 class TestBoard:
 
@@ -23,9 +23,9 @@ class TestBoard:
     def test_success_creation_of_board_with_status_code(self):
         status_code = self.objboard.get_board_status_code(self.board_response)
         try:
-            assert status_code == 200
+            assert status_code == constant.test_successful
         except:
-            logging.error('Board not created')
+            logger.error('Board not created')
 
     @pytest.mark.usefixtures('link_org')
     def test_username_is_updated_or_not_using_put_api(self):
@@ -36,31 +36,39 @@ class TestBoard:
         try:
             assert updatedname != board_name
         except:
-            logging.error("Board name not updated")
+            logger.error("Board name not updated")
 
     @pytest.mark.usefixtures('link_org')
     def test_board_username_field_is_empty(self):
         try:
             assert self.objboard.name_empty_board(self.org_id) == constant.negative_case
         except:
-            logging.error("Name is not empty")
+            logger.error("Name is not empty")
 
     @pytest.mark.usefixtures('link_org')
     def test_board_label_color_changed_or_not(self):
         try:
             assert self.objboard.create_labels_in_the_board(self.board_id) == constant.color
         except:
-            logging.warning("color of label not changed please check")
+            logger.error("color of label not changed please check")
 
     @pytest.mark.usefixtures('link_org')
     def test_check_list_in_the_board(self):
-        assert self.objboard.get_info_about_create_list_inboard(self.board_id) == constant.test_successful
+        try:
+            assert self.objboard.get_info_about_create_list_inboard(self.board_id) == constant.test_successful
+        except:
+            logger.error("list can not be checked in board")
 
     @pytest.mark.usefixtures('link_org')
     def test_side_bar_created_or_not(self):
         try:
             assert self.objboard.show_sidebar_in_board_put(self.board_id) == constant.test_successful
         except:
-            logging.warning("sidebar is created in false value")
+            logger.error("sidebar is created in false value")
 
-
+    @pytest.mark.usefixtures('link_org')
+    def test_email_key_is_generated_or_not(self):
+        try:
+            assert self.objboard.get_api_board_email_key_generated(self.board_id) == constant.test_successful
+        except:
+            logger.error('in board email key is not generated')

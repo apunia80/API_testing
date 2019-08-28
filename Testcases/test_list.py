@@ -4,8 +4,8 @@ import pytest
 import constant
 from Pages.board import Board
 from Pages.lists import Lists
+from logger_file import *
 
-logging.basicConfig(filename=constant.logger_file, format=constant.logger_format)
 
 
 class TestLists:
@@ -30,7 +30,7 @@ class TestLists:
         try:
             assert response.status_code == constant.test_successful
         except:
-            logging.error("list not created succesfully")
+            logger.error("list not created succesfully")
 
     def test_status_code_when_name_field_is_empty(self):
         objlist = Lists()
@@ -45,7 +45,7 @@ class TestLists:
         try:
             assert negative_list_response == constant.negative_case
         except:
-            logging.error(" in list it runs with blank name input")
+            logger.error(" in list it runs with blank name input")
 
     @pytest.mark.usefixtures('list_fixture')
     def test_check_position_is_changed_or_not(self):
@@ -54,7 +54,7 @@ class TestLists:
         try:
             assert changed_pos != actual_pos
         except:
-            logging.error("in list position not changed")
+            logger.error("in list position not changed")
 
     @pytest.mark.usefixtures('list_fixture')
     def test_name_is_updated_or_not(self):
@@ -63,42 +63,42 @@ class TestLists:
         try:
             assert updated_name != actual_name
         except:
-            logging.error("list name not updated")
+            logger.error("list name not updated")
 
     @pytest.mark.usefixtures('list_fixture')
     def test_put_close_archive_the_list(self):
         try:
             assert self.objlist.close_list_by_putclose_api(self.list_id) == constant.true
         except:
-            logging.error("in list request not archived")
+            logger.error("in list request not archived")
 
     @pytest.mark.usefixtures('list_fixture')
     def test_softlimit_status_code_run_or_not_running(self):
         try:
             assert self.objlist.set_soft_limit_of_card(self.list_id)
         except:
-            logging.error("in list softlimit cannot be updated")
+            logger.error("in list softlimit cannot be updated")
 
     @pytest.mark.usefixtures('list_fixture')
     def test_subscription_api_status_code(self):
         try:
             assert self.objlist.subscription_detail(self.list_id) == constant.test_successful
         except:
-            logging.error("in list subscription not done")
+            logger.error("in list subscription not done")
 
     @pytest.mark.usefixtures('list_fixture')
     def test_subscription_boolien_value_the_list_is_subscribed_or_not(self):
         try:
             assert self.objlist.get_api_to_check_sybscription_in_field(self.list_id)==constant.true
         except:
-            logging.error("in list channel is not subscribed")
+            logger.error("in list channel is not subscribed")
 
     @pytest.mark.usefixtures('list_fixture')
     def test_get_board_gives_information_about_board_in_which_list_is_present(self):
         try:
             assert self.objlist.get_api_check_board_information(self.list_id) == constant.test_successful
         except:
-            logging.error("information cannot be fatched")
+            logger.error("information cannot be fatched")
 
     @pytest.mark.usefixtures('list_fixture')
     def test_get_all_information_about_cards(self):
@@ -106,7 +106,7 @@ class TestLists:
             assert self.objlist.get_list_of_card_in_a_list(self.list_id) == constant.test_successful
 
         except:
-            logging.error("list card information cannot fetched")
+            logger.error("list card information cannot fetched")
 
 
 
